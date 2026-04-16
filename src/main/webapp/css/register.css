@@ -1,0 +1,122 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: #9fa88f; /* soft olive green */
+}
+
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* LEFT SIDE */
+
+.left {
+    width: 50%;
+    background: white;
+    padding: 50px;
+    margin: 40px;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: gray;
+    margin-bottom: 20px;
+}
+
+form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: black;
+    color: white;
+    border: none;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #333;
+}
+
+.login-link {
+    margin-top: 15px;
+}
+
+.login-link a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+    margin-bottom: 10px;
+}
+
+
+/* RIGHT SIDE */
+
+.right {
+    width: 50%;
+    background: url("<%= request.getContextPath() %>/images/pet.jpg") no-repeat center;
+    background-size: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+
+.overlay {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    right: 40px;
+    color: white;
+    text-align: center;
+}
+
+.overlay h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.overlay p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+.logo img {
+    height: 40px;
+    vertical-align: middle;
+}

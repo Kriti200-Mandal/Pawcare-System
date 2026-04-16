@@ -1,0 +1,136 @@
+@charset "UTF-8";
+/* BODY */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #fdf6ec;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #6d4c41;
+    color: #fff;
+    position: fixed;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+    color: #ffd8a8;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.sidebar ul li:hover,
+.sidebar ul li.active {
+    background: #8d6e63;
+}
+
+/* MAIN */
+.main {
+    margin-left: 260px;
+    padding: 30px;
+}
+
+/* TOPBAR */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    color: #5d4037;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.card {
+    flex: 1;
+    padding: 20px;
+    border-radius: 16px;
+    color: #5d4037;
+    background: white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.card i {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #f4a261;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* SOFT COLOR STRIPS */
+.card.blue { border-left: 6px solid #f4a261; }
+.card.green { border-left: 6px solid #81c784; }
+.card.orange { border-left: 6px solid #ffb74d; }
+.card.red { border-left: 6px solid #e57373; }
+
+/* TABLE */
+.table-section {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.table-section h3 {
+    color: #5d4037;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th {
+    background: #f8efe5;
+    padding: 12px;
+}
+
+table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/* BADGES */
+.badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    color: white;
+    font-size: 12px;
+}
+
+.pending { background: #f4a261; }
+.approved { background: #66bb6a; }
+.rejected { background: #ef5350; }
+
+/* EXTRA MODERN TOUCH */
+.card p {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.card h4 {
+    margin-top: 10px;
+}

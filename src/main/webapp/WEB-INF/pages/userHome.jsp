@@ -12,12 +12,18 @@
 <!-- NAVBAR -->
 <div class="navbar">
     <h2>🐾 PawCare</h2>
-    <ul>
-        <li>Dashboard</li>
-        <li>Browse Pets</li>
-        <li>My Adoptions</li>
-        <li>Logout</li>
-    </ul>
+  
+     
+        
+<div class="nav-links">
+         <a href="${pageContext.request.contextPath}/user/home">Home</a>
+        <a href="${pageContext.request.contextPath}/PetController" >Browse Pets</a>
+        <a href="#">About</a>
+       <!-- - -- <a href="#">Adoption</a>--->
+         <a href="${pageContext.request.contextPath}/adoptionController" >Adoption</a>
+        <a href="${pageContext.request.contextPath}/LogoutController" class="login-btn">Logout</a>
+    </div>
+        
 </div>
 
 <!-- MAIN CONTENT -->

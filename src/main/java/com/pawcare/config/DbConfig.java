@@ -13,7 +13,7 @@ public class DbConfig {
 
     public Connection getConnection() throws SQLException {
         try {
-            // 🔥 LOAD DRIVER (THIS IS MISSING)
+            //  LOAD DRIVER 
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

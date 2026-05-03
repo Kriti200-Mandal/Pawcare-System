@@ -16,13 +16,39 @@
 <div class="sidebar">
     <h2>🐾 PawCare</h2>
     <ul>
-        <li class="active"><i class="fa fa-home"></i> Dashboard</li>
-        <li><i class="fa fa-dog"></i> Pets</li>
-        <li><i class="fa fa-heart"></i> Adoptions</li>
-        <li><i class="fa fa-users"></i> Users</li>
-        <li><i class="fa fa-cog"></i> Settings</li>
+        <li class="active">
+        <a href = "${pageContext.request.contextPath}/admin/home">
+                <i class="fa fa-home"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <li>
+        <a href = " ${pageContext.request.contextPath}/PetController">
+                <i class="fa fa-dog"></i>
+                <span>Pets</span>
+            </a>
+        </li>
+
+        <li>
+        <a href = "${pageContext.request.contextPath}/admin/adoptions">
+                <i class="fa fa-heart"></i>
+                <span>Adoptions</span>
+            </a>
+        </li>
+
+        <li>
+        <a href = "
+            ${pageContext.request.contextPath}/admin/users">
+                <i class="fa fa-users"></i>
+                <span>Users</span>
+            </a>
+        </li>
+
+       
     </ul>
 </div>
+
 
 <!-- MAIN -->
 <div class="main">
@@ -38,27 +64,27 @@
         <div class="card blue">
             <i class="fa fa-users"></i>
             <h4>Total Users</h4>
-            <p>120</p>
+           <p>${totalUsers}</p>
         </div>
 
         <div class="card green">
             <i class="fa fa-dog"></i>
             <h4>Total Pets</h4>
-            <p>45</p>
+             <p>${totalPets}</p>
         </div>
 
         <div class="card orange">
             <i class="fa fa-heart"></i>
             <h4>Adoptions</h4>
-            <p>30</p>
+           <p>${totalAdoptions}</p>
         </div>
 
         <div class="card red">
             <i class="fa fa-clock"></i>
             <h4>Pending</h4>
-            <p>5</p>
+             <p>${pendingAdoptions}</p>
         </div>
-    </div>
+    </div>    
 
     <!-- TABLE -->
     <div class="table-section">

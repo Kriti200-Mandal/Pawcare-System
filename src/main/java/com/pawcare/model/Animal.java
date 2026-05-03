@@ -9,8 +9,9 @@ public class Animal {
     private String breed;
     private int age;
     private String adoptionStatus;
-
-    // ✅ GETTERS
+    private String image;
+    
+   
     public int getAnimalId() {
         return animalId;
     }
@@ -35,6 +36,11 @@ public class Animal {
         return adoptionStatus;
     }
 
+    public String getImage() {
+          return image;
+      }
+
+
     
     public void setAnimalId(int animalId) {
         this.animalId = animalId;
@@ -55,6 +61,11 @@ public class Animal {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public void setImage(String image) {
+           this.image = image;
+       }
+
 
     public void setAdoptionStatus(String adoptionStatus) {
         this.adoptionStatus = adoptionStatus;

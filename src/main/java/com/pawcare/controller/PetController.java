@@ -37,6 +37,7 @@ AnimalDAO dao = new AnimalDAO();
         List<Animal> animals = dao.getAllAnimals();
        // System.out.println("Animals size: " + animals.size());
         request.setAttribute("animals", animals);
+        request.setAttribute("animalCount", animals.size());
 		request.getRequestDispatcher("/WEB-INF/pages/animal.jsp").forward(request,response);
 	}
 

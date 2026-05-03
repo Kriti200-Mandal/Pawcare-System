@@ -25,8 +25,9 @@ public class AnimalDAO {
 	            a.setBreed(rs.getString("breed"));
 	            a.setAge(rs.getInt("age"));
 	            a.setAdoptionStatus(rs.getString("adoption_status"));
-
+	            a.setImage(rs.getString("image"));
 	            animals.add(a);
+	           
 	        }
 
 	    } catch (Exception e) {

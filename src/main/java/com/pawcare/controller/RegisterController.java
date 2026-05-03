@@ -41,16 +41,18 @@ public class RegisterController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-    String name = request.getParameter("name");
+    String name = request.getParameter("fullName");
     String email = request.getParameter("email");
     String password = request.getParameter("password");
-    String phone = request.getParameter("phone");
-    
+
+     String confirmPassword = request.getParameter("confirmPassword");
+
 
      if(name == null || name.trim().isEmpty() ||
        email == null || email.trim().isEmpty() ||
        password == null || password.trim().isEmpty() ||
-       phone == null || phone.trim().isEmpty()) {
+       confirmPassword == null || confirmPassword.trim().isEmpty())
+     {
 
         request.setAttribute("error", "All fields are required");
         request.getRequestDispatcher("/WEB-INF/pages/register.jsp")
@@ -78,20 +80,21 @@ public class RegisterController extends HttpServlet {
         return;
     }
    
-   phone = phone.trim();
+  /* phone = phone.trim();
 
    if(!phone.matches("^[0-9]{10}$")) {
 	    request.setAttribute("error", "Phone must be 10 digits and numeric only");
 	    request.getRequestDispatcher("/WEB-INF/pages/register.jsp")
 	           .forward(request, response);
 	    return;
-	}
+	}*/
    
 
    String checkEmailSql = "SELECT id FROM users WHERE email = ?";
 
    String insertSql =
-       "INSERT INTO users (name, email, password, phone, role) VALUES (?, ?, ?, ?, ?)";
+       
+		   "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
 
    try {
        DbConfig db = new DbConfig();
@@ -108,6 +111,14 @@ public class RegisterController extends HttpServlet {
                   .forward(request, response);
            return;
        }
+      
+
+       if (!password.equals(confirmPassword)) {
+           request.setAttribute("error", "Passwords do not match");
+           request.getRequestDispatcher("/WEB-INF/pages/register.jsp")
+                  .forward(request, response);
+           return;
+       }
 
        
 
@@ -115,8 +126,8 @@ PreparedStatement ps = con.prepareStatement(insertSql);
 ps.setString(1, name);
 ps.setString(2, email);
 ps.setString(3, password);
-ps.setString(4, phone);
-ps.setString(5, "USER");
+
+ps.setString(4, "USER");
 
 
        ps.executeUpdate();

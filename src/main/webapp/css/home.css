@@ -10,8 +10,10 @@ body {
 .sidebar {
     width: 240px;
     height: 100vh;
-    background: #6d4c41;
-    color: #fff;
+   /* background: #6d4c41;*/
+   background: #fff7ee;
+   /* color: #fff;*/
+   color: black;
     position: fixed;
     padding: 20px;
 }
@@ -133,4 +135,23 @@ table td {
 
 .card h4 {
     margin-top: 10px;
+}
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    padding: 10px;
+    width: 100%;
+}
+
+.sidebar ul li.active,
+.sidebar ul li:hover {
+    background-color: #e6d3c1; 
+    border-radius: 10px;
+}
+
+.sidebar ul li i {
+    font-size: 16px;
 }

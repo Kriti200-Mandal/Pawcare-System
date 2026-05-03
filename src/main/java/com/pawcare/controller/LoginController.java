@@ -42,7 +42,7 @@ public class LoginController extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		 String email = request.getParameter("email");
-		    String password = request.getParameter("pw");
+		 String password = request.getParameter("password");
 		    String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
 
 		    if ("admin@gmail.com".equals(email) && "admin123".equals(password)) {
@@ -69,10 +69,12 @@ try {
                    // login success
 
             HttpSession session = request.getSession();
+           session.setAttribute("userId", rs.getInt("id")); 
             session.setAttribute("userType", "user");
             session.setAttribute("userEmail", email);
 
             response.sendRedirect(request.getContextPath() + "/user/home");
+            
 
                   
                } else {

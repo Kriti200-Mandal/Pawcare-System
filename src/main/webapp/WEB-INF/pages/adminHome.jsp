@@ -24,7 +24,7 @@
         </li>
 
         <li>
-        <a href = " ${pageContext.request.contextPath}/PetController">
+        <a href = " ${pageContext.request.contextPath}/admin/pets">
                 <i class="fa fa-dog"></i>
                 <span>Pets</span>
             </a>

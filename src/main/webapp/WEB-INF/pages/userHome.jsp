@@ -39,15 +39,15 @@
     <div class="cards">
         <div class="card">
             <h4>Available Pets</h4>
-            <p>18</p>
+            <p>${availablePets}</p>
         </div>
         <div class="card">
             <h4>My Requests</h4>
-            <p>2</p>
+             <p>${myRequests}</p>
         </div>
         <div class="card">
             <h4>Adopted Pets</h4>
-            <p>1</p>
+         <p>${adoptedPets}</p>
         </div>
     </div>
 
@@ -57,7 +57,7 @@
 
         <div class="pet-grid">
             <div class="pet-card">
-                images/dog.jpg
+               <img src="${pageContext.request.contextPath}/images/${p.image}">
                 <h4>Loki</h4>
                 <button>Adopt</button>
             </div>

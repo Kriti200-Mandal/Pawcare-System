@@ -61,6 +61,9 @@
                            name="password"
                            placeholder="Enter your password"
                            required>
+                    <a href = "${pageContext.request.contextPath}/ForgotPasswordController" class = "forgot-link">
+    Forgot Password?
+</a>
                 </div>
             </div>
 

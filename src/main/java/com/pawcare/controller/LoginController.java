@@ -1,6 +1,7 @@
 package com.pawcare.controller;
 
 import jakarta.servlet.ServletException;
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -70,6 +71,7 @@ try {
 
             HttpSession session = request.getSession();
            session.setAttribute("userId", rs.getInt("id")); 
+           session.setAttribute("userName", rs.getString("name"));
             session.setAttribute("userType", "user");
             session.setAttribute("userEmail", email);
 

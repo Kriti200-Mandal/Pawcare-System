@@ -67,6 +67,27 @@
         </c:forEach>
     </table>
 </div>
+<hr style="margin:50px 0;">
+<h2 style="margin-top:40px;">Contact Messages</h2>
 
+<table class="adoption-table">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Subject</th>
+        <th>Message</th>
+        <th>Date</th>
+    </tr>
+
+    <c:forEach var="c" items="${contactMessages}">
+        <tr>
+            <td>${c.name}</td>
+            <td>${c.email}</td>
+            <td>${c.subject}</td>
+            <td>${c.message}</td>
+            <td>${c.createdAt}</td>
+        </tr>
+    </c:forEach>
+</table>
 </body>
 </html>

@@ -20,14 +20,22 @@
     <div class="nav-right">
         <a href="${pageContext.request.contextPath}/user/home">Home</a>
         <a href="${pageContext.request.contextPath}/PetController" >Browse Pets</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="${pageContext.request.contextPath}/aboutController">About</a>
+        <a href="${pageContext.request.contextPath}/adoptionController">Adoption</a>
         <a href="${pageContext.request.contextPath}/LogoutController" class="login-btn">Logout</a>
     </div>
 </nav>
 <div class="pets-container">
    
  <h1 class="page-title">Find Your Perfect Companion</h1>
+    
+ <div class="header-right">
+        <form action="${pageContext.request.contextPath}/PetController" method="get" class="search-box">
+            <input type="text" name="keyword" placeholder="Search dog / cat" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
     
 <p class="subtitle">
     ${animalCount} animals waiting for their forever homes

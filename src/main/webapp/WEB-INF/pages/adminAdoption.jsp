@@ -16,6 +16,21 @@
 
 
 <!-- ADMIN NAVBAR -->
+<nav class="navbar">
+    <div class="nav-left">
+        <span class="logo">🐾 PawCare</span>
+    </div>
+
+    <div class="nav-right">
+        <a href="${pageContext.request.contextPath}/admin/home">Home</a>
+        <a href="${pageContext.request.contextPath}/admin/pets" >Pets</a>
+        <a href="${pageContext.request.contextPath}/aboutController">About</a>
+       
+        <a href="${pageContext.request.contextPath}/admin/adoptions">Adoption</a>
+        <a href="${pageContext.request.contextPath}/LogoutController" class="login-btn">Logout</a>
+    </div>
+</nav>
+<!-- - --
 <div class="navbar">
     <span class="logo">🐾 PawCare Admin</span>
     <a href="${pageContext.request.contextPath}/admin/home">Dashboard</a>
@@ -23,7 +38,7 @@
         Adoption Requests
     </a>
     <a href="${pageContext.request.contextPath}/LogoutController">Logout</a>
-</div>
+</div>-->
 
 <div class="pets-container">
 <c:if test="${not empty sessionScope.flashMessage}">
@@ -39,7 +54,51 @@
    
     <div class="adoption-grid">
         <c:forEach var="a" items="${adoptions}">
-            <div class="adoption-card">
+        
+<div class="pet-card">
+
+            <!-- IMAGE -->
+            <div class="pet-image">
+                <img src="${pageContext.request.contextPath}/images/${a.image}"
+                     alt="${a.animalName}">
+                
+                <span class="status-badge ${a.status}">
+                    ${a.status}
+                </span>
+            </div>
+
+            <!-- INFO -->
+        
+<div class="pet-info">
+                <h3>${a.animalName}</h3>
+
+                <p class="breed">
+                    User: ${a.userName}
+                </p>
+        
+ <!-- ACTIONS -->
+                <c:if test="${a.status == 'Pending'}">
+                    <form method="post"
+                          action="${pageContext.request.contextPath}/admin/adoptions">
+                        <input type="hidden" name="adoptionId"
+                               value="${a.adoptionId}">
+                        <button name="action" value="approve"
+                                class="adopt-btn">
+                            Approve
+                        </button>
+        
+<button name="action" value="reject"
+                                class="adopt-btn"
+                                style="background:#dc2626;">
+                            Reject
+                        </button>
+                    </form>
+                </c:if>
+            </div>
+        
+ </div>
+        
+           <!-- -- -- <div class="adoption-card">
 
                 <img src="${pageContext.request.contextPath}/images/${a.image}">
 
@@ -57,7 +116,7 @@
                     </form>
                 </c:if>
 
-            </div>
+            </div>---->
         </c:forEach>
     </div>
 </div>

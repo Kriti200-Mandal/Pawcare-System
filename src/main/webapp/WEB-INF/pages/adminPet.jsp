@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Admin Pet</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pet.css">
 </head>
 <body>
@@ -17,11 +17,13 @@
     </div>
 
     <div class="nav-right">
-        <a href="${pageContext.request.contextPath}/user/home">Home</a>
-        <a href="${pageContext.request.contextPath}/PetController" >Browse Pets</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+     <a href="${pageContext.request.contextPath}/admin/home">Home</a>
+        <a href="${pageContext.request.contextPath}/admin/pets" >Pets</a>
+        <a href="${pageContext.request.contextPath}/aboutController">About</a>
+       
+        <a href="${pageContext.request.contextPath}/admin/adoptions">Adoption</a>
         <a href="${pageContext.request.contextPath}/LogoutController" class="login-btn">Logout</a>
+    
     </div>
 </nav>
 
@@ -39,7 +41,7 @@
         <c:remove var="flashMessage" scope="session"/>
         <c:remove var="flashType" scope="session"/>
     </c:if>
-   
+ <!-- - --
  <form method="post" class="add-pet-form">
         <input type="hidden" name="action" value="add">
 
@@ -50,7 +52,58 @@
         <input name="image" placeholder="Image file (dog.jpg)" required>
          
  <button>Add Pet</button>
-    </form>
+    </form>---->
+    <form method="post" action="${pageContext.request.contextPath}/admin/pets"
+      class="add-pet-form">
+
+    <input type="hidden"
+           name="action"
+           value="${editPet != null ? 'update' : 'add'}">
+
+    <c:if test="${editPet != null}">
+        <input type="hidden"
+               name="animalId"
+               value="${editPet.animalId}">
+    </c:if>
+
+    <input name="name"
+           placeholder="Pet Name"
+           value="${editPet.name}"
+           required>
+
+    <input name="species"
+           placeholder="Species"
+           value="${editPet.species}"
+           required>
+
+    <input name="breed"
+           placeholder="Breed"
+           value="${editPet.breed}"
+           required>
+
+    <input name="age"
+           type="number"
+           placeholder="Age"
+           value="${editPet.age}"
+           required>
+
+    <input name="image"
+           placeholder="Image file (dog.jpg)"
+           value="${editPet.image}"
+           required>
+
+    <button>
+        <c:choose>
+            <c:when test="${editPet != null}">
+                Update Pet
+            </c:when>
+            <c:otherwise>
+                Add Pet
+            </c:otherwise>
+        </c:choose>
+    </button>
+</form>
+    
 
     <!--  PET LIST -->
     <div class="pet-grid">
@@ -70,6 +123,23 @@
         <input type="hidden" name="animalId" value="${p.animalId}">
         <button class="delete-btn">Delete</button>
     </form>
+    
+  <c:choose>
+    <c:when test="${p.adoptionStatus == 'Available'}">
+        <form action="${pageContext.request.contextPath}/admin/pets" method="get">
+            <input type="hidden" name="action" value="edit">
+            <input type="hidden" name="animalId" value="${p.animalId}">
+            <button>Edit</button>
+        </form>
+    </c:when>
+
+    <c:otherwise>
+        <button disabled style="opacity:0.5; cursor:not-allowed;">
+            Edit
+        </button>
+    </c:otherwise>
+</c:choose>
+
 
 </div>
         </c:forEach>

@@ -34,6 +34,8 @@ public class adminPetController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+  
+
 		 if (!"admin".equals(request.getSession().getAttribute("userType"))) {
 		            response.sendRedirect(request.getContextPath() + "/LoginController");
 		            return;
@@ -41,6 +43,48 @@ public class adminPetController extends HttpServlet {
 
 
        List<Animal> pets = new ArrayList<>();
+       String action = request.getParameter("action");
+
+       if ("edit".equals(action)) {
+         int animalId = Integer.parseInt(request.getParameter("animalId"));
+
+ try (Connection con = new DbConfig().getConnection()) {
+
+         PreparedStatement ps = con.prepareStatement(
+             "SELECT * FROM animals WHERE animal_id=?"
+         );
+         ps.setInt(1, animalId);
+         ResultSet rs = ps.executeQuery();
+
+         if (rs.next()) {
+
+        	 String status = rs.getString("adoption_status");
+
+        	            //  BLOCK EDIT IF NOT AVAILABLE
+        	            if (!"Available".equals(status)) {
+        	                request.getSession().setAttribute(
+        	                    "flashMessage", "Adopted pets cannot be edited ❌"
+        	                );
+        	                request.getSession().setAttribute("flashType", "error");
+        	                response.sendRedirect(request.getContextPath() + "/admin/pets");
+        	                return;
+        	            }
+
+             Animal pet = new Animal();
+             pet.setAnimalId(rs.getInt("animal_id"));
+             pet.setName(rs.getString("name"));
+             pet.setSpecies(rs.getString("species"));
+             pet.setBreed(rs.getString("breed"));
+             pet.setAge(rs.getInt("age"));
+             pet.setImage(rs.getString("image"));
+
+             request.setAttribute("editPet", pet);
+         }
+
+     } catch (Exception e) {
+         e.printStackTrace();
+     }
+       }
 
 		        try (Connection con = new DbConfig().getConnection()) {
 
@@ -84,7 +128,7 @@ public class adminPetController extends HttpServlet {
 
 		        try (Connection con = new DbConfig().getConnection()) {
 
-		            // ✅ ADD PET
+		            //  ADD PET
 		            if ("add".equals(action)) {
 		                String sql = """
 		                    INSERT INTO animals (name, species, breed, age, image, adoption_status)
@@ -116,14 +160,53 @@ public class adminPetController extends HttpServlet {
 
                 request.getSession().setAttribute("flashType", "error");
                         }
+                      // update
+                      if ("update".equals(action)) {
 
-                    } catch (Exception e) {
+                    	    int animalId = Integer.parseInt(request.getParameter("animalId"));
+
+                    	    //  CHECK STATUS FIRST
+                    	    PreparedStatement checkPs =
+                    	        con.prepareStatement("SELECT adoption_status FROM animals WHERE animal_id=?");
+                    	    checkPs.setInt(1, animalId);
+                    	    ResultSet rs = checkPs.executeQuery();
+
+                    	    if (rs.next() && !"Available".equals(rs.getString("adoption_status"))) {
+                    	        request.getSession().setAttribute(
+                    	            "flashMessage", "Cannot update an adopted pet ❌"
+                    	        );
+                    	        request.getSession().setAttribute("flashType", "error");
+                    	        response.sendRedirect(request.getContextPath() + "/admin/pets");
+                    	        return;
+                    	    }
+
+                    	    //  PERFORM UPDATE
+                    	    PreparedStatement ps = con.prepareStatement("""
+                    	        UPDATE animals
+                    	        SET name=?, species=?, breed=?, age=?, image=?
+                    	        WHERE animal_id=?
+                    	    """);
+
+                    	    ps.setString(1, request.getParameter("name"));
+                    	    ps.setString(2, request.getParameter("species"));
+                    	    ps.setString(3, request.getParameter("breed"));
+                    	    ps.setInt(4, Integer.parseInt(request.getParameter("age")));
+                    	    ps.setString(5, request.getParameter("image"));
+                    	    ps.setInt(6, animalId);
+
+                    	    ps.executeUpdate();
+
+                    	    request.getSession().setAttribute(
+                    	        "flashMessage", "Pet updated successfully ✏️"
+                    	    );
+                    	    request.getSession().setAttribute("flashType", "success");
+                    	}
+		        } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                     response.sendRedirect(request.getContextPath() + "/admin/pets");
                 }
-
 
 
 		

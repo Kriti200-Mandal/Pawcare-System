@@ -23,7 +23,7 @@
     <div class="nav-right">
         <a href="${pageContext.request.contextPath}/user/home">Home</a>
         <a href="${pageContext.request.contextPath}/PetController">Browse Pets</a>
-        <a href="#">About</a>
+        <a href="${pageContext.request.contextPath}/aboutController">About</a>
         <a href="${pageContext.request.contextPath}/adoptionController">Adoption</a>
         <a href="${pageContext.request.contextPath}/LogoutController" class="login-btn">Logout</a>
     </div>
@@ -55,6 +55,7 @@
         <img src="${pageContext.request.contextPath}/images/${a.image}"
              alt="${a.animalName}">
     </div>
+    
             
 
                 <div class="card-header">

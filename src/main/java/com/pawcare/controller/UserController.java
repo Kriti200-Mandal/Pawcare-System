@@ -1,6 +1,7 @@
 package com.pawcare.controller;
 
 import jakarta.servlet.ServletException;
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,6 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
+import com.pawcare.model.Animal;
+
 
 
 import com.pawcare.config.DbConfig;
@@ -60,7 +63,32 @@ Integer userId = (Integer) request.getSession().getAttribute("userId");
         	                    "SELECT COUNT(*) FROM adoptions WHERE user_id=? AND status='Approved'",
         	                    userId
         	                )
-        	            );}catch (Exception e) {
+        	            );
+
+List<Animal> availablePetsList = new ArrayList<>();
+
+            String sqlPets = """
+                SELECT animal_id, name, image
+                FROM animals
+                WHERE adoption_status = 'Available'
+                LIMIT 3
+            """;
+
+
+PreparedStatement psPets = con.prepareStatement(sqlPets);
+            ResultSet rsPets = psPets.executeQuery();
+
+            while (rsPets.next()) {
+                Animal a = new Animal();
+                a.setAnimalId(rsPets.getInt("animal_id"));
+                a.setName(rsPets.getString("name"));
+                a.setImage(rsPets.getString("image"));
+                availablePetsList.add(a);
+            }
+            request.setAttribute("availablePetsList", availablePetsList);
+
+        
+        	 }catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -85,6 +113,9 @@ Integer userId = (Integer) request.getSession().getAttribute("userId");
 	        return rs.getInt(1);
 	    }
 	 
+
+
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

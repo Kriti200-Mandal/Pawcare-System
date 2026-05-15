@@ -86,18 +86,39 @@
 
                 <h4>${p.name}</h4>
 
-                <form method="post"
-                      action="${pageContext.request.contextPath}/adoptionController">
-                    <input type="hidden" name="action" value="adopt">
-                    <input type="hidden" name="animalId" value="${p.animalId}">
-                    <button class="view-btn">View</button>
-                </form>
+                <form action="${pageContext.request.contextPath}/pet/details" method="get">
+    <input type="hidden" name="animalId" value="${p.animalId}">
+    <button class="view-btn">View</button>
+</form>
+                
 
             </div>
         </c:forEach>
     </div>
 </div>
-    
+    <!-- -journey -->
+    <section class="journey">
+    <h2>Your Adoption Journey</h2>
+
+    <div class="journey-steps">
+        <div class="step">
+            <span>1</span>
+            <p>Browse available pets</p>
+        </div>
+        <div class="step">
+            <span>2</span>
+            <p>Send adoption request</p>
+        </div>
+        <div class="step">
+            <span>3</span>
+            <p>Wait for approval</p>
+        </div>
+        <div class="step">
+            <span>4</span>
+            <p>Welcome your pet home 🐾</p>
+        </div>
+    </div>
+</section>
 
        <!-- - --<div class="pet-grid">
            <div class="pet-card">

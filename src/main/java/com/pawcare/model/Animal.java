@@ -70,4 +70,13 @@ public class Animal {
     public void setAdoptionStatus(String adoptionStatus) {
         this.adoptionStatus = adoptionStatus;
     }
+    private boolean alreadyAdopted;
+
+    public boolean isAlreadyAdopted() {
+        return alreadyAdopted;
+    }
+
+    public void setAlreadyAdopted(boolean alreadyAdopted) {
+        this.alreadyAdopted = alreadyAdopted;
+    }
 }

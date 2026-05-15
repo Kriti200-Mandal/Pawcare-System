@@ -15,10 +15,11 @@
     </div>
 
     <div class="nav-right">
-        <a href="${pageContext.request.contextPath}/user/home">Home</a>
-        <a href="${pageContext.request.contextPath}/PetController" >Browse Pets</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+         <a href="${pageContext.request.contextPath}/admin/home">Home</a>
+        <a href="${pageContext.request.contextPath}/admin/pets" >Pets</a>
+        <a href="${pageContext.request.contextPath}/aboutController">About</a>
+       
+        <a href="${pageContext.request.contextPath}/admin/adoptions">Adoption</a>
         <a href="${pageContext.request.contextPath}/LogoutController" class="login-btn">Logout</a>
     </div>
 </nav>

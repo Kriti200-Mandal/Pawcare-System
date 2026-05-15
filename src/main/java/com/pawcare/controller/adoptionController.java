@@ -76,6 +76,7 @@ public class adoptionController extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
+        
 
         try {
             Connection con = new DbConfig().getConnection();
@@ -88,7 +89,10 @@ public class adoptionController extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/LoginController");
                     return;
                 }
-
+                // adoption
+                
+               
+                 //insert
                 String sql = "INSERT INTO adoptions (user_id, animal_id) VALUES (?, ?)";
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setInt(1, userId);

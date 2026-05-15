@@ -200,3 +200,34 @@ view-btn {
     transform: translateY(-6px);
     transition: 0.25s ease;
 }
+/*journey*/
+.journey {
+    margin-top: 80px;
+    padding: 40px;
+    background: #fff;
+    border-radius: 20px;
+}
+
+.journey h2 {
+    margin-bottom: 30px;
+}
+
+.journey-steps {
+    display: flex;
+    justify-content: space-between;
+}
+
+.step {
+    text-align: center;
+    width: 22%;
+}
+
+.step span {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: #ffd166;
+    border-radius: 50%;
+    line-height: 40px;
+    font-weight: bold;
+}

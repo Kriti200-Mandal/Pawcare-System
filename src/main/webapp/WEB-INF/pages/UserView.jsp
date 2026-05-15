@@ -67,7 +67,7 @@
             </tr>
         </c:forEach>
     </table>
-</div>
+
 <hr style="margin:50px 0;">
 <h2 style="margin-top:40px;">Contact Messages</h2>
 
@@ -90,5 +90,6 @@
         </tr>
     </c:forEach>
 </table>
+</div>
 </body>
 </html>

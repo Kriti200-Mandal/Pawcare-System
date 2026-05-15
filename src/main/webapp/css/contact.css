@@ -1,111 +1,190 @@
-@charset "UTF-8";
+/* ===== GLOBAL ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #ece6df; /* same soft background */
+    color: #111;
+}
+
+/* ===== NAVBAR ===== */
 .navbar {
-    height: 64px;
-    background-color: #2f3e46;   /*  dark background */
+    background: #3a4b52;
+    padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 40px;
 }
 
-.nav-left .logo {
+.navbar .logo {
     color: white;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
 }
 
-.nav-right a,
-.nav-links a {
+.navbar a {
     color: white;
-    font-weight: 500;
     text-decoration: none;
-    margin-left: 22px;
-    line-height: 64px;            
-    transition: color 0.2s ease;
+    margin-left: 20px;
 }
 
-.nav-right a:hover,
-.nav-links a:hover {
-    color: #ffd166;
-}
-
-/* Active link */
-.nav-right a.active,
-.nav-links a.active {
-    border-bottom: 2px solid #ffd166;
-    padding-bottom: 6px;
-}
-
-/* Logout button – same height as links */
-.nav-right .login-btn,
-.nav-links .login-btn {
-    height: 36px;
-    line-height: 36px;
-    padding: 0 16px;
-    background: #ffd166;
-    color: #2f3e46 !important;
-    border-radius: 18px;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-}
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #fff7ed;
-}
-
-.contact-hero {
-    text-align: center;
-    padding: 60px 20px;
-}
-
-.contact-container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 40px 20px;
-    display: flex;
-    gap: 40px;
-}
-
-.contact-info {
-    flex: 1;
-}
-
-.contact-form {
-    flex: 1;
-    background: white;
-    padding: 30px;
+.login-btn {
+    background: #f4c15d;
+    color: black;
+    padding: 8px 16px;
     border-radius: 20px;
 }
 
+/* ===== HERO ===== */
+.contact-hero {
+    text-align: center;
+    padding: 30px 0 15px;
+}
+
+.contact-hero h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.contact-hero p {
+    color: #555;
+}
+
+/* ===== CONTAINER ===== */
+.contact-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 30px 60px;
+}
+
+/* ===== LEFT SIDE ===== */
+.contact-info {
+    width: 320px;
+}
+
+/* ===== CONTACT CARD ===== */
+.info-card {
+   background: linear-gradient(135deg, #fffaf5, #f3e5d8);  
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    
+}
+
+.info-card h2 {
+    margin-bottom: 15px;
+    
+color: #333;
+    position: relative;
+    
+}
+
+.info-card h2::after {
+    content: "";
+    width: 40px;
+    height: 3px;
+    background: #ff7a00;
+    display: block;
+    margin-top: 5px;
+}
+
+
+.info-card p {
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.info-card p strong {
+    color: #d27d2d;   
+}
+
+.info-card:hover {
+    transform: translateY(-4px);
+    transition: 0.3s;
+}
+
+
+/* ===== VISITING HOURS ===== */
+.visit-box {
+     background: linear-gradient(135deg, #ffe9cc, #ffd6b3);
+     
+    padding: 20px;
+    border-radius: 20px;
+      
+}
+
+.visit-box p {
+    color: #5a3e1b;
+}
+
+.visit-box h3 {
+    color: #b35400;
+    margin-bottom: 10px;
+}
+
+
+/* ===== FORM ===== */
+.contact-form {
+    background: #f7f7f7;
+    padding: 30px;
+    border-radius: 20px;
+    width: 400px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.contact-form h2 {
+    margin-bottom: 20px;
+}
+
+/* ===== INPUTS ===== */
 .contact-form input,
 .contact-form textarea {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    border-radius: 12px;
     border: none;
-    background: #f3f3f3;
+    border-radius: 12px;
+    background: #eaeaea;
+    outline: none;
 }
 
 .contact-form textarea {
     height: 120px;
 }
 
+/* ===== BUTTON (MATCH LOGIN) ===== */
 .contact-form button {
     width: 100%;
-    padding: 12px;
-    background: black;
+    padding: 14px;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #000, #2c2c2c);
     color: white;
     border: none;
-    border-radius: 25px;
     cursor: pointer;
 }
 
-.visit-box {
-    margin-top: 30px;
-    background: #ffeede;
-    padding: 20px;
-    border-radius: 15px;
+.contact-form button:hover {
+    background: linear-gradient(90deg, #222, #444);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .contact-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-form {
+        width: 100%;
+    }
+
+    .contact-info {
+        width: 100%;
+    }
 }

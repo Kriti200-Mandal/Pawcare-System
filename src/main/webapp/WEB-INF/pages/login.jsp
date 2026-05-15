@@ -75,7 +75,7 @@
         <!-- Footer -->
         <p class="footer-text">
             Don't have an account?
-            <a href= "RegisterController">
+            <a href= "${pageContext.request.contextPath}/register">
              
                 Register here
             </a>

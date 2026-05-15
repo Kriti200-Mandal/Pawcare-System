@@ -29,19 +29,24 @@
 <section class="contact-container">
 
     <!-- LEFT SIDE -->
-    <div class="contact-info">
+   <div class="contact-info">
+
+    <div class="info-card">
         <h2>Contact Information</h2>
 
-        <p><strong>Email</strong><br>info@pawcare.com</p>
-        <p><strong>Phone</strong><br>+977 98XXXXXXX</p>
-        <p><strong>Address</strong><br>Kathmandu, Nepal</p>
-
-        <div class="visit-box">
-            <h3>Visiting Hours</h3>
-            <p>Mon – Fri: 10 AM – 6 PM</p>
-            <p>Sat – Sun: 9 AM – 5 PM</p>
-        </div>
+       <p><i class="fa-solid fa-envelope"></i> info@pawcare.com</p>
+<p><i class="fa-solid fa-phone"></i> +977 98XXXXXXX</p>
+<p><i class="fa-solid fa-location-dot"></i> Kathmandu, Nepal</p>
+       
     </div>
+
+    <div class="visit-box">
+        <h3>Visiting Hours</h3>
+        <p>Mon – Fri: 10 AM – 6 PM</p>
+        <p>Sat – Sun: 9 AM – 5 PM</p>
+    </div>
+
+</div>
 
     <!-- RIGHT SIDE FORM -->
     <div class="contact-form">

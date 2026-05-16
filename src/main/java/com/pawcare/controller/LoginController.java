@@ -12,7 +12,7 @@ import com.pawcare.config.DbConfig;
 public class LoginController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    // ✅ SHOW LOGIN PAGE
+    //  SHOW LOGIN PAGE
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -20,7 +20,7 @@ public class LoginController extends HttpServlet {
                .forward(request, response);
     }
 
-    // ✅ HANDLE LOGIN
+    //  HANDLE LOGIN
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        // ✅ ✅ 1. ADMIN LOGIN (STATIC CHECK)
+        //  1. ADMIN LOGIN (STATIC CHECK)
         if ("admin@gmail.com".equals(email) && "admin123".equals(password)) {
 
             session.setAttribute("userType", "admin");
@@ -39,7 +39,7 @@ public class LoginController extends HttpServlet {
             return;
         }
 
-        // ✅ ✅ 2. USER LOGIN FROM DATABASE
+        // 2. USER LOGIN FROM DATABASE
         String sql = "SELECT * FROM users WHERE email=? AND password=?";
 
         try (Connection con = new DbConfig().getConnection();
@@ -52,7 +52,7 @@ public class LoginController extends HttpServlet {
 
             if (rs.next()) {
 
-                // ✅ store session
+                //  store session
                 session.setAttribute("userId", rs.getInt("id"));
                 session.setAttribute("userName", rs.getString("name"));
                 session.setAttribute("userType", "user");
@@ -72,7 +72,7 @@ public class LoginController extends HttpServlet {
         }
     }
 
-    // ✅ ✅ ✅ REUSABLE METHOD (VERY CLEAN)
+    //  REUSABLE METHOD (VERY CLEAN)
     private void handleRedirectAfterLogin(HttpSession session,
                                           HttpServletRequest request,
                                           HttpServletResponse response)
@@ -81,12 +81,12 @@ public class LoginController extends HttpServlet {
         String redirectUrl = (String) session.getAttribute("redirectAfterLogin");
         String userType = (String) session.getAttribute("userType");
 
-        // ✅ If user tried to access something before login
+        //  If user tried to access something before login
         if (redirectUrl != null) {
 
             session.removeAttribute("redirectAfterLogin");
 
-            // ❌ USER trying admin page
+            //  USER trying admin page
             if (redirectUrl.contains("/admin") && !"admin".equals(userType)) {
 
                 session.setAttribute("flashMessage",
@@ -97,12 +97,12 @@ public class LoginController extends HttpServlet {
                 return;
             }
 
-            // ✅ allow redirect
+            //  allow redirect
             response.sendRedirect(request.getContextPath() + redirectUrl);
             return;
         }
 
-        // ✅ DEFAULT REDIRECT
+        //  DEFAULT REDIRECT
         if ("admin".equals(userType)) {
             response.sendRedirect(request.getContextPath() + "/admin/pets");
         } else {

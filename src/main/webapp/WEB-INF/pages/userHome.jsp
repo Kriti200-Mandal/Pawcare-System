@@ -8,6 +8,17 @@
     <title>PawCare | User Dashboard</title>
   <link rel="stylesheet" href="<%= request.getContextPath() %>/css/user.css">
 </head>
+<c:if test="${not empty sessionScope.flashMessage}">
+    <div class="flash-wrapper">
+        <div class="flash ${sessionScope.flashType}">
+            <span class="icon">⚠️</span>
+            ${sessionScope.flashMessage}
+        </div>
+    </div>
+
+    <c:remove var="flashMessage" scope="session"/>
+    <c:remove var="flashType" scope="session"/>
+</c:if>
 <body>
 
 <!-- NAVBAR -->

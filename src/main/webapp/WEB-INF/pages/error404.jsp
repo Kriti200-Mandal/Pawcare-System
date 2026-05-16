@@ -1,33 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>404 - Page Not Found | PawCare</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/error.css">
 </head>
+
 <body>
 
-<div class="pets-container" style="text-align:center; margin-top:80px;">
-    <h1>404 🐾</h1>
-    <h2>Oops! Page not found</h2>
-    <p>The page you’re looking for doesn’t exist or you may have logged out.</p>
+<div class="error-container">
 
-    <div style="margin-top:30px;">
-    <a>
-        ${pageContext.request.contextPath}/user/home
-            Go to Home
-        </a>
+    <div class="error-card">
 
-     <a>   ${pageContext.request.contextPath}/PetController
-            Browse Pets
-        </a>
+        <div class="error-code">404</div>
 
-     <a>   ${pageContext.request.contextPath}/LoginController
+        <h1>Page Not Found</h1>
 
-Login Again
-        </a>
+        <p>
+            Oops! The page you are looking for doesn't exist or has been moved.
+        </p>
+
+        <div class="error-actions">
+            <a href="${pageContext.request.contextPath}/admin/home" class="btn-primary">
+                Go to Dashboard
+            </a>
+
+            <a href="${pageContext.request.contextPath}/" class="btn-secondary">
+                Back to Home
+            </a>
+        </div>
+
     </div>
+
 </div>
 
 </body>

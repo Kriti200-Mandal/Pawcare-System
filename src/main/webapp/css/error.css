@@ -1,0 +1,74 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #ece6df;   /* same soft background as login */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-container {
+    text-align: center;
+}
+
+.error-card {
+    background: #ffffff;
+    padding: 50px 40px;
+    border-radius: 20px;
+    width: 420px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.error-icon {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.error-card h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.error-card p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.error-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Buttons */
+.btn-primary {
+    padding: 12px 22px;
+    background: linear-gradient(90deg, #000, #2c2c2c);
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #222, #444);
+}
+
+.btn-secondary {
+    padding: 12px 22px;
+    background: #f4c15d;
+    color: black;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 14px;
+}

@@ -40,6 +40,7 @@ public class adminPetController extends HttpServlet {
 		            response.sendRedirect(request.getContextPath() + "/LoginController");
 		            return;
 		        }
+		
 
 
        List<Animal> pets = new ArrayList<>();
@@ -123,13 +124,58 @@ public class adminPetController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if (!"admin".equals(request.getSession().getAttribute("userType"))) {
 
+		    request.getSession().setAttribute(
+		        "flashMessage",
+		        "Access denied ❌ Only authorized admin users can access this page."
+		    );
+		    request.getSession().setAttribute("flashType", "error");
+
+		    response.sendRedirect(request.getContextPath() + "/user/home");
+		    return;
+		}
 		 String action = request.getParameter("action");
 
 		        try (Connection con = new DbConfig().getConnection()) {
 
 		            //  ADD PET
 		            if ("add".equals(action)) {
+		            	String name = request.getParameter("name");
+
+             if (!name.matches("[a-zA-Z ]+")) {
+                   request.getSession().setAttribute(
+            "flashMessage", "Pet name must contain only alphabets ❌"
+                   );
+              request.getSession().setAttribute("flashType", "error");
+              response.sendRedirect(request.getContextPath() + "/admin/pets");
+             return;
+         }
+
+             int age;
+
+                try {
+                    age = Integer.parseInt(request.getParameter("age"));
+
+                    if (age < 0) {
+                        request.getSession().setAttribute(
+                            "flashMessage", "Age cannot be negative ❌"
+                        );
+                        request.getSession().setAttribute("flashType", "error");
+                        response.sendRedirect(request.getContextPath() + "/admin/pets");
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    request.getSession().setAttribute(
+                        "flashMessage", "Invalid age entered ❌"
+                    );
+                    request.getSession().setAttribute("flashType", "error");
+                    response.sendRedirect(request.getContextPath() + "/admin/pets");
+                    return;
+                }
+
+
+
 		                String sql = """
 		                    INSERT INTO animals (name, species, breed, age, image, adoption_status)
 		                    VALUES (?, ?, ?, ?, ?, 'Available')

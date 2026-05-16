@@ -252,3 +252,55 @@ view-btn {
     line-height: 40px;
     font-weight: bold;
 }
+
+/* Wrapper to center the message */
+.flash-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Main flash box */
+.flash {
+    padding: 14px 24px;
+    border-radius: 14px;
+    font-weight: 500;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    animation: slideDown 0.4s ease;
+}
+
+/* Icon style */
+.flash .icon {
+    font-size: 18px;
+}
+
+/* ERROR STYLE (YOURS) */
+.flash.error {
+    background: #fee2e2;
+    color: #991b1b;
+    border-left: 5px solid #ef4444;
+}
+
+/* SUCCESS STYLE */
+.flash.success {
+    background: #d1fae5;
+    color: #065f46;
+    border-left: 5px solid #10b981;
+}
+
+/* Animation */
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

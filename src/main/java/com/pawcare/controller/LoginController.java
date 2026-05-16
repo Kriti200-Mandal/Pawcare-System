@@ -1,98 +1,112 @@
 package com.pawcare.controller;
 
 import jakarta.servlet.ServletException;
-
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
+import java.sql.*;
+
 import com.pawcare.config.DbConfig;
 
-/**
- * Servlet implementation class LoginController
- */
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginController() {
-        super();
-        // TODO Auto-generated constructor stub
+    private static final long serialVersionUID = 1L;
+
+    // ✅ SHOW LOGIN PAGE
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        request.getRequestDispatcher("/WEB-INF/pages/login.jsp")
+               .forward(request, response);
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request,response);
-	}
+    // ✅ HANDLE LOGIN
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
-		 String email = request.getParameter("email");
-		 String password = request.getParameter("password");
-		    String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+        HttpSession session = request.getSession();
 
-		    if ("admin@gmail.com".equals(email) && "admin123".equals(password)) {
+        // ✅ ✅ 1. ADMIN LOGIN (STATIC CHECK)
+        if ("admin@gmail.com".equals(email) && "admin123".equals(password)) {
 
-		           HttpSession session = request.getSession();
-		           session.setAttribute("userType", "admin");
-
-		           response.sendRedirect(request.getContextPath() + "/admin/home");
-		           return; 
-		       }
-
-
-try {
-        DbConfig db = new DbConfig();
-        Connection con = db.getConnection();
-        PreparedStatement ps = con.prepareStatement(sql);
-
-        ps.setString(1, email);
-        ps.setString(2, password);
-
-        ResultSet rs = ps.executeQuery();
-
-        if (rs.next()) {
-                   // login success
-
-            HttpSession session = request.getSession();
-           session.setAttribute("userId", rs.getInt("id")); 
-           session.setAttribute("userName", rs.getString("name"));
-            session.setAttribute("userType", "user");
+            session.setAttribute("userType", "admin");
             session.setAttribute("userEmail", email);
 
+            handleRedirectAfterLogin(session, request, response);
+            return;
+        }
+
+        // ✅ ✅ 2. USER LOGIN FROM DATABASE
+        String sql = "SELECT * FROM users WHERE email=? AND password=?";
+
+        try (Connection con = new DbConfig().getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, email);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                // ✅ store session
+                session.setAttribute("userId", rs.getInt("id"));
+                session.setAttribute("userName", rs.getString("name"));
+                session.setAttribute("userType", "user");
+                session.setAttribute("userEmail", email);
+
+                handleRedirectAfterLogin(session, request, response);
+
+            } else {
+                // ❌ login failed
+                request.setAttribute("error", "Invalid email or password");
+                request.getRequestDispatcher("/WEB-INF/pages/login.jsp")
+                       .forward(request, response);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ✅ ✅ ✅ REUSABLE METHOD (VERY CLEAN)
+    private void handleRedirectAfterLogin(HttpSession session,
+                                          HttpServletRequest request,
+                                          HttpServletResponse response)
+            throws IOException {
+
+        String redirectUrl = (String) session.getAttribute("redirectAfterLogin");
+        String userType = (String) session.getAttribute("userType");
+
+        // ✅ If user tried to access something before login
+        if (redirectUrl != null) {
+
+            session.removeAttribute("redirectAfterLogin");
+
+            // ❌ USER trying admin page
+            if (redirectUrl.contains("/admin") && !"admin".equals(userType)) {
+
+                session.setAttribute("flashMessage",
+                    "Access denied ❌ Only authorized admin users can access that page.");
+                session.setAttribute("flashType", "error");
+
+                response.sendRedirect(request.getContextPath() + "/user/home");
+                return;
+            }
+
+            // ✅ allow redirect
+            response.sendRedirect(request.getContextPath() + redirectUrl);
+            return;
+        }
+
+        // ✅ DEFAULT REDIRECT
+        if ("admin".equals(userType)) {
+            response.sendRedirect(request.getContextPath() + "/admin/pets");
+        } else {
             response.sendRedirect(request.getContextPath() + "/user/home");
-            
-
-                  
-               } else {
-                   // login failed
-                   request.setAttribute("error", "Invalid email or password");
-                   request.getRequestDispatcher("/WEB-INF/pages/login.jsp")
-                          .forward(request, response);
-               }
-
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
-
-
-
-		
-	}
-
+        }
+    }
 }
